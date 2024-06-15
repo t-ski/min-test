@@ -1,12 +1,11 @@
+/*
+ * MinimalTest https://github.com/t-ski/min-test
+ * (c) Thassilo Martin Schiepanski
+ */
+
 const { resolve, join } = require("path");
 const { readdirSync } = require("fs");
 const { deepEqual } = require("assert");
-
-
-process.on("exit", code => {
-    !code && console.log("\x1b[32mAll tests passed.\x1b[0m");
-});
-
 
 let i = 0;
 global.test = function(actual, expected) {
@@ -29,24 +28,15 @@ global.test = function(actual, expected) {
     }
 };
 
+process.on("exit", code => {
+    !code && console.log("\x1b[32mAll tests passed.\x1b[0m");
+});
 
-function runTests(path) {
-    readdirSync(path, {
-        withFileTypes: true
-    })
-    .forEach(dirent => {
-        const subPath = join(path, dirent.name);
-
-        if(dirent.isDirectory()) {
-            runTests(subPath);
-
-            return;
-        }
-        
-        if(!/\.test\.js$/.test(dirent.name)) return;
-
-        require(subPath);
-    });
-}
-
-runTests(resolve(process.argv.slice(2)[0] ?? "./test/"));
+readdirSync(resolve(process.argv.slice(2)[0] ?? "./test/"), {
+    withFileTypes: true,
+    recursive: true
+})
+.forEach(dirent => {
+    if(!/\.test\.js$/.test(dirent.name)) return;
+    require(join(dirent.path, dirent.name));
+});
