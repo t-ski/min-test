@@ -1,26 +1,34 @@
-# <ins>Min</ins>imal <ins>Test</ins>
+# MinTest
 
-A minimal test script for NodeJS that favours integration of lean unit testing capabiltiies into lean projects.
+A <ins>min</ins>imal <ins>test</ins> script in favour of lean unit testing with lean NodeJS projects.
+
+``` cli
+curl -o min-test.js https://raw.githubusercontent.com/t-ski/min-test/main/min-test.js
+```
+
+### Usage
+
+MinTest recursively scans and evaluates test files in the `./test` directory. Each file named according to the pattern `*.test.js` is a test file and subject to evaluation. The global scope defines the `test()` function that provides a simple, yet powerful (weak-deep-equal) assertion interface:
+
+> Optionally, a different test directory path may be specified through the first positional CLI argument. 
 
 ``` cli
 node min-test.js <test-directory-path>?
 ```
 
-The script recursively scans through a designated test directory. The path to the test directory can be provided as the first positional CLI argument (`./test/` by default). Each file whose name ends with `.test.js` is considered a test file and thus evaluated. Within each test file, the globally accessible `test()` function provides a simple, weak-deep-equal assertion interface:
-
 ``` ts
 test(actual: unknown, expected: unknown);
 ```
 
-## Example
+### Example
 
+<sub>test/example.test.js</sub>
 ``` js
 test(5 + 5, 10);            // ✅
 test((() => 5 + 5)(), 10);  // ✅
 test(5, "5");               // ✅
 
 test(5 + 5, 9);             // ❌
-
 ```
 
 ##
