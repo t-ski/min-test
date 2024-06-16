@@ -1,5 +1,5 @@
 /*
- * MinimalTest https://github.com/t-ski/min-test
+ * MinTest https://github.com/t-ski/min-test
  * (c) Thassilo Martin Schiepanski
  */
 
