@@ -2,7 +2,13 @@
 
 A <ins>min</ins>imal <ins>test</ins> script in favour of lean unit testing with lean NodeJS projects.
 
-<sub>package.json</sub> <sub>`npm i`</sub>
+<sub>**Download**</sub>
+
+``` cli
+curl -o min-test.js https://raw.githubusercontent.com/t-ski/min-test/main/min-test.js
+```
+
+<sub>**Via NPM**</sub> <sub>`package.json`</sub> <sub>→</sub> <sub>`npm i`</sub>
 ``` json
 "scripts": {
   "prepare": "curl -o min-test.js https://raw.githubusercontent.com/t-ski/min-test/main/min-test.js"

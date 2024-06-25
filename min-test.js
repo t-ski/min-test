@@ -1,7 +1,5 @@
-/*
- * MinTest https://github.com/t-ski/min-test
- * (c) Thassilo Martin Schiepanski
- */
+#!/usr/bin/env node
+
 
 const { resolve, join } = require("path");
 const { readdirSync } = require("fs");
@@ -11,7 +9,11 @@ let i = 0;
 global.test = function(actual, expected) {
     i++;
 
-    const path = ((new Error()).stack || "").split(/\n/g)[2];
+    const path = ((new Error()).stack || "")
+    .split(/\n/g)
+    .slice(2)
+    .filter((line) => /\.test\.js/.test(line))
+    .shift();
     
     try {
         deepEqual(actual, expected);
@@ -40,3 +42,9 @@ readdirSync(resolve(process.argv.slice(2)[0] ?? "./test/"), {
     if(!/\.test\.js$/.test(dirent.name)) return;
     require(join(dirent.path, dirent.name));
 });
+
+
+/*
+ * MinTest https://github.com/t-ski/min-test
+ * (c) Thassilo Martin Schiepanski
+ */
